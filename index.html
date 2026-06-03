@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Julian's Graduation Celebration 2027</title>
+  <meta name="description" content="Celebrate Julian Apodaca's graduation from Regis University — May 2027, Denver, CO." />
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
+  <link rel="icon" href="favicon-16.png" type="image/png" sizes="16x16" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['DM Sans', 'system-ui', 'sans-serif'],
+            display: ['Playfair Display', 'Georgia', 'serif'],
+          },
+          colors: {
+            navy: {
+              DEFAULT: '#002D72',
+              dark: '#001A45',
+              light: '#1a4a8a',
+            },
+            gold: {
+              DEFAULT: '#8A704C',
+              light: '#B89A6A',
+              bright: '#D4A853',
+            },
+            warm: {
+              50:  '#FFFBF5',
+              100: '#FFF7EB',
+              200: '#FFECD1',
+              300: '#FFE0B2',
+            },
+            rose: {
+              soft: '#FFE4E8',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: #FFFBF5;
+      background-image:
+        radial-gradient(circle at 20% 50%, rgba(212,168,83,0.06) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(0,45,114,0.04) 0%, transparent 50%),
+        radial-gradient(circle at 50% 90%, rgba(255,183,77,0.05) 0%, transparent 40%);
+    }
+
+    /* ── Tabs ── */
+    .tab-btn {
+      position: relative;
+      padding: 0.65rem 1rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #9ca3af;
+      border: none;
+      background: none;
+      cursor: pointer;
+      transition: color 0.2s;
+      white-space: nowrap;
+    }
+    .tab-btn::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%) scaleX(0);
+      width: 70%;
+      height: 3px;
+      border-radius: 3px;
+      background: linear-gradient(90deg, #D4A853, #8A704C);
+      transition: transform 0.25s ease;
+    }
+    .tab-btn.active {
+      color: #002D72;
+    }
+    .tab-btn.active::after {
+      transform: translateX(-50%) scaleX(1);
+    }
+    .tab-btn.disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+
+    /* ── Hero canvas ── */
+    #confetti-canvas {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ── Cards ── */
+    .event-card {
+      background: white;
+      border-radius: 1.25rem;
+      border: 1px solid rgba(0,0,0,0.05);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .event-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.07);
+    }
+
+    /* ── Buttons ── */
+    .btn-fun {
+      background: linear-gradient(135deg, #002D72 0%, #1a4a8a 100%);
+      color: white;
+      border: none;
+      border-radius: 100px;
+      padding: 0.75rem 1.75rem;
+      font-weight: 600;
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 4px 14px rgba(0,45,114,0.25);
+    }
+    .btn-fun:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(0,45,114,0.35);
+    }
+    .btn-warm {
+      background: linear-gradient(135deg, #D4A853 0%, #8A704C 100%);
+      color: white;
+      border: none;
+      border-radius: 100px;
+      padding: 0.75rem 1.75rem;
+      font-weight: 600;
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 4px 14px rgba(138,112,76,0.25);
+    }
+    .btn-warm:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(138,112,76,0.35);
+    }
+    .pill-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.4rem 0.9rem;
+      border-radius: 100px;
+      transition: all 0.15s;
+    }
+
+    /* ── Form ── */
+    .form-input {
+      width: 100%;
+      border: 2px solid #f0ebe3;
+      border-radius: 0.75rem;
+      padding: 0.65rem 0.85rem;
+      font-size: 0.875rem;
+      outline: none;
+      transition: all 0.2s;
+      background: #FFFBF5;
+      font-family: inherit;
+    }
+    .form-input:focus {
+      border-color: #D4A853;
+      background: white;
+      box-shadow: 0 0 0 4px rgba(212,168,83,0.12);
+    }
+
+    /* ── Accordion ── */
+    .accordion-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+    .accordion-body.open {
+      max-height: 2000px;
+    }
+    .accordion-chevron {
+      transition: transform 0.3s ease;
+    }
+    .accordion-chevron.open {
+      transform: rotate(180deg);
+    }
+
+    /* ── Timeline ── */
+    .tl-item {
+      position: relative;
+      padding-left: 1.5rem;
+      padding-bottom: 0.25rem;
+    }
+    .tl-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.45rem;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #D4A853, #8A704C);
+    }
+    .tl-item::after {
+      content: '';
+      position: absolute;
+      left: 3.5px;
+      top: 1.1rem;
+      width: 1px;
+      height: calc(100% - 0.5rem);
+      background: #f0ebe3;
+    }
+    .tl-item:last-child::after { display: none; }
+
+    /* ── Sparkle float ── */
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-8px) rotate(5deg); }
+    }
+    .float { animation: float 3s ease-in-out infinite; }
+    .float-delay { animation: float 3s ease-in-out 0.5s infinite; }
+    .float-delay-2 { animation: float 3s ease-in-out 1s infinite; }
+  </style>
+</head>
+
+<body class="min-h-screen flex flex-col text-gray-700">
+
+  <!-- ═══ TAB NAV ═══ -->
+  <nav class="bg-white/80 backdrop-blur-lg border-b border-gray-100 sticky top-0 z-10">
+    <div class="max-w-2xl mx-auto flex justify-center gap-1 px-2">
+      <button id="tab-details" class="tab-btn active" onclick="switchTab('details')">
+        Event Details
+      </button>
+      <button id="tab-guide" class="tab-btn" onclick="switchTab('guide')">
+        Weekend Guide
+      </button>
+      <button id="tab-rsvp" class="tab-btn" onclick="switchTab('rsvp')">
+        RSVP
+      </button>
+    </div>
+  </nav>
+
+  <!-- ═══ TOOLTIP (shared, positioned via JS) ═══ -->
+  <div id="tooltip-coming-soon"
+    class="fixed z-50 bg-navy text-white text-xs font-semibold rounded-lg px-3 py-1.5 shadow-lg pointer-events-none opacity-0 transition-opacity duration-200"
+    style="top:0; left:0;">
+    Coming Soon
+  </div>
+
+  <!-- ═══ MAIN ═══ -->
+  <main class="flex-1 max-w-2xl mx-auto w-full px-4 py-6 sm:py-8">
+
+    <!-- ═══════════ PANEL 1: SAVE THE DATE ═══════════ -->
+    <section id="panel-details">
+
+      <!-- HERO -->
+      <div class="relative rounded-3xl overflow-hidden mb-6 shadow-lg">
+        <img src="https://www.regis.edu/news/_images/2025-commencement-banner-1200x797-2.jpg"
+          alt="" aria-hidden="true"
+          class="absolute inset-0 w-full h-full object-cover opacity-25" />
+        <canvas id="confetti-canvas"></canvas>
+        <div class="relative z-2 bg-gradient-to-br from-navy/80 via-navy-light/75 to-navy-dark/80 px-6 pt-10 pb-8 sm:pt-14 sm:pb-10 text-center">
+
+          <!-- floating emojis -->
+          <div class="absolute top-4 left-6 text-2xl float opacity-60">&#127891;</div>
+          <div class="absolute top-8 right-8 text-xl float-delay opacity-50">&#127881;</div>
+          <div class="absolute bottom-12 left-10 text-lg float-delay-2 opacity-40">&#10024;</div>
+
+          <div class="relative z-3">
+            <img src="julian.jpg" alt="Julian Apodaca"
+              class="w-28 h-28 sm:w-36 sm:h-36 rounded-full object-cover mx-auto mb-5
+                     border-[3px] border-white/30 shadow-2xl
+                     ring-4 ring-gold-bright/30 ring-offset-2 ring-offset-navy" />
+            <p class="text-gold-bright/80 text-xs font-semibold uppercase tracking-[0.25em] mb-2">Save the Date</p>
+            <h1 class="font-display text-4xl sm:text-5xl text-white mb-2 leading-tight">
+              Julian Apodaca
+            </h1>
+            <p class="text-white/60 text-base sm:text-lg font-medium mb-1">
+              is graduating!
+            </p>
+            <p class="text-white/40 text-sm font-medium mb-5">
+              Regis University &middot; Class of 2027
+            </p>
+            <div class="inline-flex items-center gap-3 bg-white/10 backdrop-blur
+                        rounded-full px-5 py-2.5 text-sm text-white/80 font-semibold tracking-wide">
+              <span>May 1 &amp; 2, 2027</span>
+              <span class="w-1 h-1 rounded-full bg-gold-bright"></span>
+              <span>Denver, CO</span>
+            </div>
+          </div>
+        </div>
+        <div class="h-1.5 bg-gradient-to-r from-gold-bright via-gold-light to-gold"></div>
+      </div>
+
+      <!-- TWO EVENT CARDS WITH BACKGROUND IMAGES -->
+      <div class="space-y-4">
+
+        <!-- Dinner Card — Saturday -->
+        <div class="relative rounded-2xl overflow-hidden shadow-md group cursor-default" style="min-height: 220px;">
+          <img src="https://images.squarespace-cdn.com/content/v1/585ff6199f7456471a4b7991/4fc40da2-0cac-4feb-9094-d30fd50b3482/1.jpg"
+            alt="Urban Farmer Denver"
+            class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20"></div>
+          <div class="relative z-2 flex flex-col justify-end h-full p-5 sm:p-6" style="min-height: 220px;">
+            <div class="mb-auto">
+              <span class="inline-block bg-gold-bright/90 text-navy-dark text-[0.65rem] font-bold uppercase tracking-widest rounded-full px-3 py-1 mb-2">
+                Saturday &middot; May 1
+              </span>
+            </div>
+            <div>
+              <h2 class="text-2xl sm:text-3xl font-display text-white mb-1">Celebration Dinner</h2>
+              <p class="text-white/70 text-sm mb-1">6:30 PM &middot; Urban Farmer</p>
+              <p class="text-white/45 text-xs mb-3">1659 Wazee St, Denver, CO</p>
+              <div id="host-line" class="text-xs text-white/35 italic mb-3">Host details coming soon</div>
+              <div class="flex gap-2 flex-wrap">
+                <a href="https://maps.google.com/?q=Urban+Farmer+1659+Wazee+St+Denver+CO+80202"
+                  target="_blank" rel="noopener"
+                  class="pill-link bg-white/15 backdrop-blur text-white hover:bg-white/30 border border-white/20">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                  Directions
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Commencement Card — Sunday -->
+        <div class="relative rounded-2xl overflow-hidden shadow-md group cursor-default" style="min-height: 220px;">
+          <img src="https://images.unsplash.com/photo-1627556704302-624286467c65?w=800&q=80&auto=format&fit=crop"
+            alt="Graduation ceremony"
+            class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+          <div class="absolute inset-0 bg-gradient-to-t from-navy-dark/90 via-navy/50 to-navy-dark/30"></div>
+          <div class="relative z-2 flex flex-col justify-end h-full p-5 sm:p-6" style="min-height: 220px;">
+            <div class="mb-auto">
+              <span class="inline-block bg-white/90 text-navy text-[0.65rem] font-bold uppercase tracking-widest rounded-full px-3 py-1 mb-2">
+                Sunday &middot; May 2
+              </span>
+            </div>
+            <div>
+              <h2 class="text-2xl sm:text-3xl font-display text-white mb-1">Commencement Ceremony</h2>
+              <p class="text-white/70 text-sm mb-1">10:00 AM &middot; Boettcher Commons</p>
+              <p class="text-white/45 text-xs mb-3">Regis University, Denver, CO</p>
+              <div class="flex gap-2 flex-wrap">
+                <a href="https://maps.google.com/?q=Boettcher+Commons+Regis+University+Denver+CO"
+                  target="_blank" rel="noopener"
+                  class="pill-link bg-white/15 backdrop-blur text-white hover:bg-white/30 border border-white/20">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                  Directions
+                </a>
+              </div>
+              <!-- Livestream -->
+              <div id="livestream-block" class="mt-3 bg-white/10 backdrop-blur rounded-lg px-3.5 py-2 text-xs text-white/40 flex items-center gap-2">
+                <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                <span id="livestream-text">Livestream link for those who can't make it — coming soon</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══════════ PANEL 2: WEEKEND GUIDE ═══════════ -->
+    <section id="panel-guide" class="hidden">
+
+      <!-- Hotels -->
+      <div class="mb-8">
+        <div class="flex items-center gap-2 mb-1">
+          <span class="text-xl">&#127960;</span>
+          <h2 class="text-xl font-bold text-gray-900">Where to Stay</h2>
+        </div>
+        <p class="text-sm text-gray-400 mb-4">Three picks near the action in downtown Denver.</p>
+
+        <div class="space-y-4">
+          <!-- AC Hotel -->
+          <a href="https://www.marriott.com/en-us/hotels/denac-ac-hotel-denver-downtown/overview/" target="_blank" rel="noopener"
+            class="block relative rounded-2xl overflow-hidden shadow-md group cursor-pointer" style="min-height: 160px;">
+            <img src="https://images.unsplash.com/photo-1606046604972-77cc76aee944?w=800&q=80&auto=format&fit=crop"
+              alt="AC Hotel by Marriott Denver"
+              class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent"></div>
+            <div class="relative z-2 flex flex-col justify-end h-full p-5" style="min-height: 160px;">
+              <h3 class="text-lg font-display text-white mb-0.5">AC Hotel by Marriott</h3>
+              <p class="text-white/60 text-xs mb-2">750 15th Street, Denver, CO</p>
+              <div class="flex gap-2">
+                <span class="pill-link bg-white/15 backdrop-blur text-white border border-white/20 text-[0.65rem]">
+                  View Hotel &#8594;
+                </span>
+                <span onclick="event.preventDefault(); event.stopPropagation(); window.open('https://maps.google.com/?q=AC+Hotel+by+Marriott+Denver+Downtown+750+15th+Street+Denver+CO','_blank')"
+                  class="pill-link bg-white/15 backdrop-blur text-white border border-white/20 text-[0.65rem] hover:bg-white/30">
+                  <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                  Map
+                </span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Source Hotel -->
+          <a href="https://www.thesourcehotel.com/" target="_blank" rel="noopener"
+            class="block relative rounded-2xl overflow-hidden shadow-md group cursor-pointer" style="min-height: 160px;">
+            <img src="https://cdn-ileleba.nitrocdn.com/INpnLfgaEbIQxmVVOXXrNBEDDfCpeTXh/assets/images/optimized/rev-23f0d03/www.thesourcehotel.com/content/uploads/2026/03/001_Zeppelin_Source-Hotel-Aerials_300DPI-scaled-1-1050x850.jpg"
+              alt="The Source Hotel Denver"
+              class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent"></div>
+            <div class="relative z-2 flex flex-col justify-end h-full p-5" style="min-height: 160px;">
+              <h3 class="text-lg font-display text-white mb-0.5">The Source Hotel + Market Hall</h3>
+              <p class="text-white/60 text-xs mb-2">3330 Brighton Blvd, Denver, CO</p>
+              <div class="flex gap-2">
+                <span class="pill-link bg-white/15 backdrop-blur text-white border border-white/20 text-[0.65rem]">
+                  View Hotel &#8594;
+                </span>
+                <span onclick="event.preventDefault(); event.stopPropagation(); window.open('https://maps.google.com/?q=The+Source+Hotel+3330+Brighton+Blvd+Denver+CO','_blank')"
+                  class="pill-link bg-white/15 backdrop-blur text-white border border-white/20 text-[0.65rem] hover:bg-white/30">
+                  <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                  Map
+                </span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Kimpton Monaco -->
+          <a href="https://www.ihg.com/kimptonhotels/hotels/us/en/denver/denkm/hoteldetail" target="_blank" rel="noopener"
+            class="block relative rounded-2xl overflow-hidden shadow-md group cursor-pointer" style="min-height: 160px;">
+            <img src="https://images.trvl-media.com/lodging/1000000/140000/139800/139793/f5048af9.jpg?impolicy=resizecrop&rw=575&rh=575&ra=fill"
+              alt="Kimpton Hotel Monaco Denver"
+              class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent"></div>
+            <div class="relative z-2 flex flex-col justify-end h-full p-5" style="min-height: 160px;">
+              <h3 class="text-lg font-display text-white mb-0.5">Kimpton Hotel Monaco</h3>
+              <p class="text-white/60 text-xs mb-2">1717 Champa Street, Denver, CO</p>
+              <div class="flex gap-2">
+                <span class="pill-link bg-white/15 backdrop-blur text-white border border-white/20 text-[0.65rem]">
+                  View Hotel &#8594;
+                </span>
+                <span onclick="event.preventDefault(); event.stopPropagation(); window.open('https://maps.google.com/?q=Kimpton+Hotel+Monaco+1717+Champa+St+Denver+CO','_blank')"
+                  class="pill-link bg-white/15 backdrop-blur text-white border border-white/20 text-[0.65rem] hover:bg-white/30">
+                  <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                  Map
+                </span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Saturday Guide -->
+      <div>
+        <div class="flex items-center gap-2 mb-1">
+          <span class="text-xl">&#9728;&#65039;</span>
+          <h2 class="text-xl font-bold text-gray-900">Saturday in Denver</h2>
+        </div>
+        <p class="text-sm text-gray-400 mb-4">
+          Commencement is Sunday morning. Here are some ways to enjoy Saturday before the 6:30 PM dinner.
+        </p>
+
+        <!-- Accordion 1: Relaxed -->
+        <div class="mb-3">
+          <button onclick="toggleAccordion('acc-relaxed')"
+            class="w-full relative rounded-2xl overflow-hidden text-left group" style="min-height: 90px;">
+            <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800&q=80&auto=format&fit=crop"
+              alt="Botanic gardens"
+              class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+            <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/20"></div>
+            <div class="relative z-2 flex items-center justify-between p-5" style="min-height: 90px;">
+              <div>
+                <h3 class="font-display text-lg text-white mb-0.5">Relaxed &amp; Scenic</h3>
+                <p class="text-white/50 text-xs">Gardens, shopping &amp; people-watching</p>
+              </div>
+              <svg id="chevron-acc-relaxed" class="accordion-chevron w-5 h-5 text-white/50 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+          </button>
+          <div id="acc-relaxed" class="accordion-body">
+            <div class="bg-white border border-t-0 border-gray-50 rounded-b-2xl px-5 py-5 space-y-4 shadow-sm">
+              <div class="tl-item">
+                <p class="text-[0.68rem] font-bold text-gold uppercase tracking-wider mb-0.5">Morning &middot; 10 &ndash; 12</p>
+                <p class="font-semibold text-sm text-gray-800">Denver Botanic Gardens</p>
+                <p class="text-xs text-gray-400 mt-0.5">Flat paths, plenty of benches, shade. Then a scenic drive through Congress Park &amp; Cherry Creek neighborhoods.</p>
+              </div>
+              <div class="tl-item">
+                <p class="text-[0.68rem] font-bold text-gold uppercase tracking-wider mb-0.5">Lunch &middot; 12 &ndash; 1:30</p>
+                <p class="font-semibold text-sm text-gray-800">Cherry Creek</p>
+                <p class="text-xs text-gray-400 mt-0.5">Eat near Cherry Creek Shopping Center. Plenty of seating and restrooms. Relax while others browse.</p>
+              </div>
+              <div class="tl-item">
+                <p class="text-[0.68rem] font-bold text-gold uppercase tracking-wider mb-0.5">Afternoon &middot; 1:30 &ndash; 3:30</p>
+                <p class="font-semibold text-sm text-gray-800">Union Station</p>
+                <p class="text-xs text-gray-400 mt-0.5">Coffee or a drink in the main hall. Optional strolls to nearby LoDo shops. Great people-watching spot.</p>
+              </div>
+              <div class="tl-item">
+                <p class="text-[0.68rem] font-bold text-gold uppercase tracking-wider mb-0.5">Late Afternoon &middot; 3:30 &ndash; 5</p>
+                <p class="font-semibold text-sm text-gray-800">Rest at Hotel</p>
+                <p class="text-xs text-gray-400 mt-0.5">Naps, showers, regroup before the 6:30 dinner.</p>
+              </div>
+              <div class="bg-warm-100 rounded-xl px-4 py-2.5 text-xs text-gray-400">
+                All stops have paved surfaces, benches, restrooms, and easy drop-offs. Trim to just Botanic Gardens + Union Station if energy is low.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Accordion 2: Adventure -->
+        <div class="mb-3">
+          <button onclick="toggleAccordion('acc-adventure')"
+            class="w-full relative rounded-2xl overflow-hidden text-left group" style="min-height: 90px;">
+            <img src="https://cdn.sanity.io/images/nxpteyfv/goguides/cb7fab007f6b49358942e5e6fc38ae9c87c49a1a-1600x1066.jpg"
+              alt="Red Rocks Amphitheatre Colorado"
+              class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+            <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/20"></div>
+            <div class="relative z-2 flex items-center justify-between p-5" style="min-height: 90px;">
+              <div>
+                <h3 class="font-display text-lg text-white mb-0.5">Adventure &amp; Outdoors</h3>
+                <p class="text-white/50 text-xs">Red Rocks, street art &amp; Colorado vibes</p>
+              </div>
+              <svg id="chevron-acc-adventure" class="accordion-chevron w-5 h-5 text-white/50 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+          </button>
+          <div id="acc-adventure" class="accordion-body">
+            <div class="bg-white border border-t-0 border-gray-50 rounded-b-2xl px-5 py-5 space-y-4 shadow-sm">
+              <div class="tl-item">
+                <p class="text-[0.68rem] font-bold text-gold uppercase tracking-wider mb-0.5">Morning &middot; 9:30 &ndash; 12</p>
+                <p class="font-semibold text-sm text-gray-800">Red Rocks Park &amp; Amphitheatre</p>
+                <p class="text-xs text-gray-400 mt-0.5">25&ndash;30 min drive. Park near the upper lot for less stairs. Incredible vistas from the amphitheatre and visitor center.</p>
+              </div>
+              <div class="tl-item">
+                <p class="text-[0.68rem] font-bold text-gold uppercase tracking-wider mb-0.5">Lunch &middot; 12 &ndash; 1:30</p>
+                <p class="font-semibold text-sm text-gray-800">Morrison or Downtown Denver</p>
+                <p class="text-xs text-gray-400 mt-0.5">Small walkable main street in Morrison, or head back to Denver for more options.</p>
+              </div>
+              <div class="tl-item">
+                <p class="text-[0.68rem] font-bold text-gold uppercase tracking-wider mb-0.5">Afternoon &middot; 1:30 &ndash; 3:30</p>
+                <p class="font-semibold text-sm text-gray-800">RiNo Art District</p>
+                <p class="text-xs text-gray-400 mt-0.5">Colorful murals, Denver Central Market for snacks. Camp at a table while others explore.</p>
+              </div>
+              <div class="tl-item">
+                <p class="text-[0.68rem] font-bold text-gold uppercase tracking-wider mb-0.5">Late Afternoon &middot; 3:30 &ndash; 5</p>
+                <p class="font-semibold text-sm text-gray-800">Hotel Downtime</p>
+                <p class="text-xs text-gray-400 mt-0.5">Rest and reset before the dinner reservation.</p>
+              </div>
+              <div class="bg-warm-100 rounded-xl px-4 py-2.5 text-xs text-gray-400">
+                Red Rocks is dramatic but adjustable for different mobility levels. RiNo adds a younger, urban, artsy vibe.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Accordion 3: Mix & Match -->
+        <div class="mb-3">
+          <button onclick="toggleAccordion('acc-mix')"
+            class="w-full relative rounded-2xl overflow-hidden text-left group" style="min-height: 90px;">
+            <img src="https://images.unsplash.com/photo-1546156929-a4c0ac411f47?w=800&q=80&auto=format&fit=crop"
+              alt="Denver skyline"
+              class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+            <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/20"></div>
+            <div class="relative z-2 flex items-center justify-between p-5" style="min-height: 90px;">
+              <div>
+                <h3 class="font-display text-lg text-white mb-0.5">Mix &amp; Match</h3>
+                <p class="text-white/50 text-xs">Build your own Denver day</p>
+              </div>
+              <svg id="chevron-acc-mix" class="accordion-chevron w-5 h-5 text-white/50 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+          </button>
+          <div id="acc-mix" class="accordion-body">
+            <div class="bg-white border border-t-0 border-gray-50 rounded-b-2xl px-5 py-5 space-y-3 shadow-sm">
+
+              <div class="bg-warm-50 border border-warm-200 rounded-xl px-4 py-3">
+                <div class="flex items-center gap-2 mb-1">
+                  <span class="w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-xs font-bold">A</span>
+                  <h4 class="font-bold text-sm text-gray-800">Parks &amp; Nature</h4>
+                  <span class="text-[0.65rem] text-gray-400 ml-auto">1&ndash;2 hrs</span>
+                </div>
+                <p class="text-xs text-gray-500"><strong>Washington Park</strong> &mdash; lakes, flowerbeds, benches. <strong>City Park</strong> &mdash; mountain views.</p>
+              </div>
+
+              <div class="bg-warm-50 border border-warm-200 rounded-xl px-4 py-3">
+                <div class="flex items-center gap-2 mb-1">
+                  <span class="w-6 h-6 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center text-xs font-bold">B</span>
+                  <h4 class="font-bold text-sm text-gray-800">Culture &amp; Museums</h4>
+                  <span class="text-[0.65rem] text-gray-400 ml-auto">1.5&ndash;3 hrs</span>
+                </div>
+                <p class="text-xs text-gray-500"><strong>Denver Art Museum</strong> &mdash; flexible pacing. <strong>History Colorado</strong> or <strong>Nature &amp; Science</strong>.</p>
+              </div>
+
+              <div class="bg-warm-50 border border-warm-200 rounded-xl px-4 py-3">
+                <div class="flex items-center gap-2 mb-1">
+                  <span class="w-6 h-6 rounded-full bg-sky-100 text-sky-600 flex items-center justify-center text-xs font-bold">C</span>
+                  <h4 class="font-bold text-sm text-gray-800">City Ambience</h4>
+                  <span class="text-[0.65rem] text-gray-400 ml-auto">1&ndash;2 hrs</span>
+                </div>
+                <p class="text-xs text-gray-500"><strong>Union Station + LoDo</strong> &mdash; coffee &amp; Larimer Square. <strong>Cherry Creek</strong> &mdash; shopping &amp; cafes.</p>
+              </div>
+
+              <div class="bg-warm-50 border border-warm-200 rounded-xl px-4 py-3">
+                <div class="flex items-center gap-2 mb-1">
+                  <span class="w-6 h-6 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center text-xs font-bold">D</span>
+                  <h4 class="font-bold text-sm text-gray-800">Wow Add-On</h4>
+                  <span class="text-[0.65rem] text-gray-400 ml-auto">2&ndash;3.5 hrs</span>
+                </div>
+                <p class="text-xs text-gray-500"><strong>Red Rocks</strong> &mdash; dramatic scenery. <strong>Foothills Drive</strong> &mdash; no walking needed.</p>
+              </div>
+
+              <div class="bg-gradient-to-r from-gold-bright/10 to-gold/5 rounded-xl px-4 py-3 border border-gold/10">
+                <p class="text-xs font-bold text-gold mb-1.5 uppercase tracking-wider">Example Combos</p>
+                <div class="text-xs text-gray-500 space-y-0.5">
+                  <p><strong class="text-gray-700">Easy:</strong> Washington Park (A) &#8594; lunch &#8594; Union Station (C)</p>
+                  <p><strong class="text-gray-700">Balanced:</strong> Art Museum (B) &#8594; lunch &#8594; Cherry Creek (C)</p>
+                  <p><strong class="text-gray-700">Full day:</strong> Red Rocks (D) &#8594; lunch &#8594; Wash Park (A)</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ PANEL 3: RSVP ═══════════ -->
+    <section id="panel-rsvp" class="hidden">
+
+      <!-- Hero banner -->
+      <div class="relative rounded-2xl overflow-hidden shadow-md mb-6" style="min-height: 180px;">
+        <img src="https://images.squarespace-cdn.com/content/v1/585ff6199f7456471a4b7991/4fc40da2-0cac-4feb-9094-d30fd50b3482/1.jpg"
+          alt="Farm to table dinner"
+          class="absolute inset-0 w-full h-full object-cover" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20"></div>
+        <div class="relative z-2 flex flex-col items-center justify-end text-center p-6" style="min-height: 180px;">
+          <img src="julian.jpg" alt="Julian"
+            class="w-20 h-20 rounded-full object-cover border-[3px] border-white/40 shadow-xl mb-3" />
+          <h2 class="text-2xl font-display text-white mb-0.5">You're Invited</h2>
+          <p class="text-white/50 text-xs">Join us for Julian's celebration dinner</p>
+        </div>
+      </div>
+
+      <!-- RSVP Form Card -->
+      <div class="event-card px-6 py-7 mb-6">
+        <div class="bg-warm-100 rounded-xl px-4 py-3 mb-6 text-sm space-y-1">
+          <div class="flex items-center justify-between gap-2">
+            <span class="font-bold text-gray-800">&#127860; Urban Farmer</span>
+            <a href="https://maps.google.com/?q=Urban+Farmer+1659+Wazee+St+Denver+CO+80202"
+              target="_blank" rel="noopener"
+              class="text-xs font-semibold text-navy hover:text-navy-light underline underline-offset-2">
+              Directions
+            </a>
+          </div>
+          <p class="text-xs text-gray-400">1659 Wazee St, Denver &middot; Saturday May 1 at 6:30 PM</p>
+        </div>
+
+        <p class="text-sm text-gray-500 mb-5">
+          Please RSVP by <strong id="rsvp-deadline-text" class="text-gray-700">TBD</strong>. One submission per party is fine.
+        </p>
+
+        <form id="rsvp-form"
+          action="https://formspree.io/f/xpqjoqpk"
+          method="POST"
+          onsubmit="handleSubmit(event)">
+
+          <input type="hidden" name="_subject" value="Julian Grad 2027 - New RSVP" />
+          <input type="hidden" name="_timestamp" id="timestampField" />
+
+          <div class="space-y-4 mb-5">
+            <div>
+              <label class="block text-xs font-semibold text-gray-500 mb-1.5 uppercase tracking-wider">Your Name</label>
+              <input type="text" name="contact_name" required placeholder="First and last name" class="form-input" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-gray-500 mb-1.5 uppercase tracking-wider">Email</label>
+              <input type="email" name="contact_email" required placeholder="you@example.com" class="form-input" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-gray-500 mb-1.5 uppercase tracking-wider">Additional Guests</label>
+              <p class="text-xs text-gray-400 mb-1.5">Anyone else in your party — leave blank if just you.</p>
+              <input type="text" name="additional_guests" placeholder="e.g. Mom, Dad, Oliver" class="form-input" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-gray-500 mb-1.5 uppercase tracking-wider">Dietary Restrictions</label>
+              <textarea name="dietary_notes" rows="2"
+                placeholder="Allergies, vegetarian, gluten-free, etc."
+                class="form-input resize-none"></textarea>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-fun w-full py-3.5 text-sm">
+            Submit RSVP &#8594;
+          </button>
+        </form>
+
+        <!-- Success -->
+        <div id="rsvp-success" class="hidden text-center py-8">
+          <div class="text-5xl mb-3">&#127881;</div>
+          <h3 class="text-lg font-bold text-gray-900 mb-1">You're on the list!</h3>
+          <p class="text-sm text-gray-400">Thanks for RSVPing. We'll be in touch with final details.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="bg-white/60 backdrop-blur border-t border-gray-100 py-6 px-4">
+    <div class="max-w-2xl mx-auto flex flex-col items-center gap-4">
+      <div class="flex gap-3 flex-wrap justify-center">
+
+        <!-- RSVP button -->
+        <button id="btn-rsvp-footer"
+          class="btn-fun flex items-center gap-2 text-sm"
+          onclick="switchTab('rsvp')">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+          RSVP
+        </button>
+
+        <!-- Calendar -->
+        <div class="relative" id="cal-wrapper">
+          <button class="btn-warm flex items-center gap-2 text-sm"
+            onclick="toggleCalMenu()">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            Add to Calendar
+            <svg class="w-3 h-3 opacity-60" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+
+          <div id="cal-menu" class="hidden absolute bottom-full mb-2 left-1/2 -translate-x-1/2
+                                    bg-white rounded-2xl shadow-2xl border border-gray-100
+                                    w-56 overflow-hidden z-30">
+            <div class="px-4 py-2 bg-warm-50">
+              <p class="text-[0.65rem] font-bold text-gray-400 uppercase tracking-wider">Saturday Dinner</p>
+            </div>
+            <a id="link-google-dinner" href="#" target="_blank"
+              class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-600 hover:bg-warm-100 hover:text-gray-900 transition-colors">
+              Google Calendar
+            </a>
+            <button onclick="downloadICS('dinner')"
+              class="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-600 hover:bg-warm-100 hover:text-gray-900 transition-colors text-left border-b border-gray-50">
+              Apple / Outlook (.ics)
+            </button>
+            <div class="px-4 py-2 bg-warm-50">
+              <p class="text-[0.65rem] font-bold text-gray-400 uppercase tracking-wider">Sunday Commencement</p>
+            </div>
+            <a id="link-google-commencement" href="#" target="_blank"
+              class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-600 hover:bg-warm-100 hover:text-gray-900 transition-colors">
+              Google Calendar
+            </a>
+            <button onclick="downloadICS('commencement')"
+              class="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-600 hover:bg-warm-100 hover:text-gray-900 transition-colors text-left">
+              Apple / Outlook (.ics)
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <p class="text-xs text-gray-400 text-center">
+        To Julian with California Love &nbsp;&middot;&nbsp; Regis University Class of 2027
+      </p>
+    </div>
+  </footer>
+
+  <!-- ═══ SCRIPTS ═══ -->
+  <script>
+
+    // ─────────────────────────────────────────────
+    // FEATURE FLAGS
+    const RSVP_ENABLED   = true;
+    const GUIDE_ENABLED  = true;
+    const LIVESTREAM_URL = '';
+    const HOST_NAME      = '';
+    const RSVP_DEADLINE  = 'TBD';
+    // ─────────────────────────────────────────────
+
+    // ── Init flags
+    (function init() {
+      const tabRsvp   = document.getElementById('tab-rsvp');
+      const tabGuide  = document.getElementById('tab-guide');
+      const footerBtn = document.getElementById('btn-rsvp-footer');
+
+      if (!RSVP_ENABLED) {
+        tabRsvp.classList.add('disabled');
+        footerBtn.style.display = 'none';
+      }
+      if (!GUIDE_ENABLED) {
+        tabGuide.classList.add('disabled');
+      }
+      if (LIVESTREAM_URL) {
+        const block = document.getElementById('livestream-block');
+        block.className = 'mt-4 bg-navy rounded-xl px-4 py-2.5 text-xs flex items-center gap-2 cursor-pointer hover:bg-navy-light transition-colors';
+        block.onclick = () => window.open(LIVESTREAM_URL, '_blank');
+        document.getElementById('livestream-text').innerHTML = '<span class="text-white font-semibold">Watch Livestream &#8594;</span>';
+      }
+      if (HOST_NAME) {
+        document.getElementById('host-line').innerHTML =
+          'Hosted by <strong class="text-gray-600 not-italic">' + HOST_NAME + '</strong>';
+      }
+      if (RSVP_DEADLINE !== 'TBD') {
+        document.getElementById('rsvp-deadline-text').textContent = RSVP_DEADLINE;
+      }
+    })();
+
+    // ── Tooltip for disabled tabs
+    const tooltip = document.getElementById('tooltip-coming-soon');
+    document.querySelectorAll('.tab-btn.disabled').forEach(btn => {
+      btn.addEventListener('mouseenter', (e) => {
+        const rect = btn.getBoundingClientRect();
+        tooltip.style.top = (rect.bottom + 6) + 'px';
+        tooltip.style.left = (rect.left + rect.width / 2) + 'px';
+        tooltip.style.transform = 'translateX(-50%)';
+        tooltip.style.opacity = '1';
+      });
+      btn.addEventListener('mouseleave', () => {
+        tooltip.style.opacity = '0';
+      });
+    });
+
+    // ── Tab switching
+    function switchTab(tab) {
+      if (tab === 'rsvp' && !RSVP_ENABLED) return;
+      if (tab === 'guide' && !GUIDE_ENABLED) return;
+
+      ['details', 'guide', 'rsvp'].forEach(t => {
+        document.getElementById('panel-' + t).classList.toggle('hidden', t !== tab);
+        const btn = document.getElementById('tab-' + t);
+        btn.classList.toggle('active', t === tab);
+      });
+
+      const hashMap = { details: '', guide: '#guide', rsvp: '#rsvp' };
+      history.replaceState(null, '', hashMap[tab] || window.location.pathname);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ── Hash routing
+    (function checkHash() {
+      const h = window.location.hash;
+      if (h === '#rsvp' && RSVP_ENABLED) switchTab('rsvp');
+      else if (h === '#guide' && GUIDE_ENABLED) switchTab('guide');
+    })();
+
+    // ── Accordion
+    function toggleAccordion(id) {
+      document.getElementById(id).classList.toggle('open');
+      document.getElementById('chevron-' + id).classList.toggle('open');
+    }
+
+    // ── Form
+    async function handleSubmit(e) {
+      e.preventDefault();
+      const form = document.getElementById('rsvp-form');
+      const btn  = form.querySelector('button[type=submit]');
+      document.getElementById('timestampField').value = new Date().toISOString();
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          form.classList.add('hidden');
+          document.getElementById('rsvp-success').classList.remove('hidden');
+        } else {
+          btn.textContent = 'Try again';
+          btn.disabled = false;
+        }
+      } catch {
+        btn.textContent = 'Try again';
+        btn.disabled = false;
+      }
+    }
+
+    // ── Calendar
+    const EVENTS = {
+      dinner: {
+        title: "Julian's Graduation Dinner",
+        start: "20270501T183000",
+        end:   "20270501T213000",
+        tz:    "America/Denver",
+        location: "Urban Farmer, 1659 Wazee St, Denver, CO 80202",
+        details: "Celebrating Julian's graduation from Regis University."
+      },
+      commencement: {
+        title: "Julian's Commencement - Regis University",
+        start: "20270502T100000",
+        end:   "20270502T130000",
+        tz:    "America/Denver",
+        location: "Boettcher Commons, Regis University, Denver, CO",
+        details: "Regis University Undergraduate Commencement Ceremony."
+      }
+    };
+
+    document.getElementById('link-google-dinner').href =
+      'https://calendar.google.com/calendar/render?action=TEMPLATE' +
+      '&text=' + encodeURIComponent(EVENTS.dinner.title) +
+      '&dates=' + EVENTS.dinner.start + '/' + EVENTS.dinner.end +
+      '&ctz=' + EVENTS.dinner.tz +
+      '&location=' + encodeURIComponent(EVENTS.dinner.location) +
+      '&details=' + encodeURIComponent(EVENTS.dinner.details);
+
+    document.getElementById('link-google-commencement').href =
+      'https://calendar.google.com/calendar/render?action=TEMPLATE' +
+      '&text=' + encodeURIComponent(EVENTS.commencement.title) +
+      '&dates=' + EVENTS.commencement.start + '/' + EVENTS.commencement.end +
+      '&ctz=' + EVENTS.commencement.tz +
+      '&location=' + encodeURIComponent(EVENTS.commencement.location) +
+      '&details=' + encodeURIComponent(EVENTS.commencement.details);
+
+    function downloadICS(key) {
+      const evt = EVENTS[key];
+      const ics = [
+        "BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Julian Grad 2027//EN",
+        "BEGIN:VEVENT",
+        "SUMMARY:" + evt.title,
+        "DTSTART;TZID=" + evt.tz + ":" + evt.start,
+        "DTEND;TZID=" + evt.tz + ":" + evt.end,
+        "LOCATION:" + evt.location,
+        "DESCRIPTION:" + evt.details,
+        "STATUS:CONFIRMED","END:VEVENT","END:VCALENDAR"
+      ].join("\r\n");
+      const blob = new Blob([ics], { type: 'text/calendar' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'Julian-Grad-2027-' + key + '.ics'; a.click();
+      URL.revokeObjectURL(url);
+      toggleCalMenu();
+    }
+
+    function toggleCalMenu() {
+      document.getElementById('cal-menu').classList.toggle('hidden');
+    }
+    document.addEventListener('click', function(e) {
+      if (!document.getElementById('cal-wrapper').contains(e.target))
+        document.getElementById('cal-menu').classList.add('hidden');
+    });
+
+    // ── Confetti Canvas
+    (function confetti() {
+      const canvas = document.getElementById('confetti-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let pieces = [];
+      const colors = ['#D4A853', '#B89A6A', '#002D72', '#FFD700', '#FF6B6B', '#4ECDC4', '#FFF'];
+
+      function resize() {
+        const rect = canvas.parentElement.getBoundingClientRect();
+        canvas.width = rect.width;
+        canvas.height = rect.height;
+      }
+
+      function createPiece() {
+        return {
+          x: Math.random() * canvas.width,
+          y: -10,
+          w: Math.random() * 6 + 3,
+          h: Math.random() * 4 + 2,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          rotation: Math.random() * 360,
+          rotSpeed: (Math.random() - 0.5) * 4,
+          vx: (Math.random() - 0.5) * 0.8,
+          vy: Math.random() * 0.8 + 0.3,
+          opacity: Math.random() * 0.5 + 0.3,
+        };
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        if (pieces.length < 35 && Math.random() > 0.85) pieces.push(createPiece());
+        pieces.forEach((p, i) => {
+          p.x += p.vx;
+          p.y += p.vy;
+          p.rotation += p.rotSpeed;
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate((p.rotation * Math.PI) / 180);
+          ctx.globalAlpha = p.opacity;
+          ctx.fillStyle = p.color;
+          ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+          ctx.restore();
+          if (p.y > canvas.height + 10) pieces.splice(i, 1);
+        });
+        requestAnimationFrame(animate);
+      }
+
+      resize();
+      window.addEventListener('resize', resize);
+      animate();
+    })();
+
+  </script>
+</body>
+</html>
