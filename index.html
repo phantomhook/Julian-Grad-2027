@@ -387,11 +387,26 @@
               </span>
             </div>
             <div>
-              <h2 class="text-2xl sm:text-3xl font-display text-white mb-1">Commencement Ceremony</h2>
-              <p class="text-white/70 text-sm mb-1">10:00 AM &middot; Boettcher Commons</p>
-              <p class="text-white/45 text-xs mb-3">Regis University, Denver, CO</p>
+              <h2 class="text-2xl sm:text-3xl font-display text-white mb-2">Graduation Sunday</h2>
+              <div class="space-y-2 mb-3">
+                <div class="flex items-start gap-2">
+                  <span class="text-gold-bright text-sm mt-0.5">&#9769;</span>
+                  <div>
+                    <p class="text-white/90 text-sm font-semibold">8:00 AM &middot; Baccalaureate Mass</p>
+                    <p class="text-white/45 text-xs">St. John Francis Regis Chapel</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-2">
+                  <span class="text-gold-bright text-sm mt-0.5">&#127891;</span>
+                  <div>
+                    <p class="text-white/90 text-sm font-semibold">10:00 AM &middot; Undergraduate Commencement</p>
+                    <p class="text-white/45 text-xs">Boettcher Commons</p>
+                  </div>
+                </div>
+              </div>
+              <p class="text-white/40 text-xs mb-3">Regis University, Denver, CO</p>
               <div class="flex gap-2 flex-wrap">
-                <a href="https://maps.google.com/?q=Boettcher+Commons+Regis+University+Denver+CO"
+                <a href="https://maps.google.com/?q=Regis+University+Denver+CO"
                   target="_blank" rel="noopener"
                   class="pill-link bg-white/15 backdrop-blur text-white hover:bg-white/30 border border-white/20">
                   <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
@@ -839,6 +854,17 @@
               Apple / Outlook (.ics)
             </button>
             <div class="px-4 py-2 bg-white/5">
+              <p class="text-[0.65rem] font-bold text-white/40 uppercase tracking-wider">Sunday Baccalaureate Mass</p>
+            </div>
+            <a id="link-google-mass" href="#" target="_blank"
+              class="flex items-center gap-3 px-4 py-2.5 text-sm text-white/60 hover:bg-white/5 hover:text-white transition-colors">
+              Google Calendar
+            </a>
+            <button onclick="downloadICS('mass')"
+              class="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-white/60 hover:bg-white/5 hover:text-white transition-colors text-left border-b border-white/10">
+              Apple / Outlook (.ics)
+            </button>
+            <div class="px-4 py-2 bg-white/5">
               <p class="text-[0.65rem] font-bold text-white/40 uppercase tracking-wider">Sunday Commencement</p>
             </div>
             <a id="link-google-commencement" href="#" target="_blank"
@@ -1013,6 +1039,14 @@
         location: "Urban Farmer, 1659 Wazee St, Denver, CO 80202",
         details: "Celebrating Julian's graduation from Regis University."
       },
+      mass: {
+        title: "Baccalaureate Mass - Regis University",
+        start: "20270502T080000",
+        end:   "20270502T093000",
+        tz:    "America/Denver",
+        location: "St. John Francis Regis Chapel, Regis University, Denver, CO",
+        details: "Baccalaureate Mass preceding Julian's commencement ceremony."
+      },
       commencement: {
         title: "Julian's Commencement - Regis University",
         start: "20270502T100000",
@@ -1030,6 +1064,14 @@
       '&ctz=' + EVENTS.dinner.tz +
       '&location=' + encodeURIComponent(EVENTS.dinner.location) +
       '&details=' + encodeURIComponent(EVENTS.dinner.details);
+
+    document.getElementById('link-google-mass').href =
+      'https://calendar.google.com/calendar/render?action=TEMPLATE' +
+      '&text=' + encodeURIComponent(EVENTS.mass.title) +
+      '&dates=' + EVENTS.mass.start + '/' + EVENTS.mass.end +
+      '&ctz=' + EVENTS.mass.tz +
+      '&location=' + encodeURIComponent(EVENTS.mass.location) +
+      '&details=' + encodeURIComponent(EVENTS.mass.details);
 
     document.getElementById('link-google-commencement').href =
       'https://calendar.google.com/calendar/render?action=TEMPLATE' +
